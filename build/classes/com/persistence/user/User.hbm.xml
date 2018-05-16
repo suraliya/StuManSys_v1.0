@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+ 
+    <class name="com.persistence.user.Users" table="user">
+ 
+        <id name="uid" column="uid">
+            <generator class="native" />
+        </id>
+ 
+        <property name="email">
+            <column name="email" length="16" not-null="true" />
+        </property>
+ 
+        <property name="password">
+            <column name="password" length="16" not-null="true" />
+        </property>
+        
+        <property name="firstname">
+            <column name="firstname" length="16" not-null="true" />
+        </property>
+        
+        <property name="lastname">
+            <column name="lastname" length="16" not-null="true" />
+        </property>
+        
+        <property name="nic">
+            <column name="nic" length="16" not-null="true" />
+        </property>
+        
+        <property name="contactno">
+            <column name="contactno" length="16" not-null="true" />
+        </property>
+        
+        <property name="usertype">
+            <column name="usertype" length="16" not-null="true" />
+        </property>
+  
+    </class>
+</hibernate-mapping>

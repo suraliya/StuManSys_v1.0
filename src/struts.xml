@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+        
+<struts>
+
+	<constant name="struts.action.extention" value=""/>
+	<constant name="struts.devMode" value="true"/>
+	
+	<package name="default" extends="struts-default" namespace="/action">
+	
+		<interceptors>
+			<interceptor name="authenticationInterceptor" class="com.interceptor.AuthenticationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authenticationInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>	
+		</interceptors>	
+		
+ 		<action name="login">
+			<result>/login.jsp</result>
+		</action>
+				
+		<action name="loginAction" class="com.action.LoginAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">task</param>
+				<param name="namespace">/action</param>
+			</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		
+		<action name="addUserAction" class="com.action.AddUserAction"> 
+			<result name="success" type="redirectAction">
+				<param name="actionName">user</param>
+				<param name="namespace">/action</param>
+			</result>
+			<!-- <result name="input">/user.jsp</result>
+			<result name="error">/user.jsp</result> -->
+		</action>
+		
+		<action name="logout" class="com.action.LogoutAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">login</param>
+				<param name="namespace">/action</param>
+			</result>
+		</action>
+		
+		<action name="fetchUsersAction" class="com.action.FetchUsersAction">
+			<result name="success">/user.jsp</result>
+		</action>
+			
+		<action name="fetchStudentAction" class="com.action.FetchStudentAction">
+			<result name="success">/student.jsp</result>
+		</action>
+		
+		<action name="fetchAStudent" class="com.action.FetchAStudent">
+			<result name="success"></result>
+		</action>
+						
+		<action name="task">
+			<interceptor-ref name="secureStack"/>
+			<result>/dashboard.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+		<action name="user">
+			<interceptor-ref name="secureStack"/>
+			<result>/user.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+		<action name="student">
+			<interceptor-ref name="secureStack"/>
+			<result>/student.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+	</package>
+
+</struts>
